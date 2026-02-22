@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  padding: 0;
+  width: 350px;
+  /* Slightly wider for better title visibility */
+  height: 500px;
+  /* Fixed height for popup */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #ffffff;
+  overflow: hidden;
+  /* App handles scrolling */
+}

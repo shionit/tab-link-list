@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Artifacts
+tab-link-list-v*.zip
+
+# Others
+.env

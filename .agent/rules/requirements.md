@@ -6,6 +6,7 @@ TabLinkList is a Chrome extension that lists all open tabs in the current window
 ## Functional Requirements
 
 ### 1. Popup Interface
+
 - **Tab Listing**:
     - When the popup opens, fetch all tabs in the *current window*.
     - Display tabs in a vertical list.
@@ -15,6 +16,10 @@ TabLinkList is a Chrome extension that lists all open tabs in the current window
         - Tab Title.
     - **Visual Feedback**: Selected tabs are visually highlighted (e.g., background color change).
     - Clicking the item (label) toggles the checkbox.
+
+- **Default Selection**:
+    - When the popup opens, the **current (active) tab is pre-selected** automatically.
+    - All other tabs start unselected.
 
 - **Selection Controls**:
     - "Select All" checkbox in the header to toggle all tab selections at once.

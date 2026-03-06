@@ -1,18 +1,32 @@
 # TabLinkList
 
-A Chrome extension that lists all open tabs in the current window, lets you select specific tabs, and copies their titles and URLs to the clipboard in your preferred format.
+> A Chrome extension that lists all open tabs, lets you select them, and copies their titles and URLs to the clipboard.
+
+[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-TabLinkList-blue?logo=google-chrome)](https://chromewebstore.google.com/detail/tablinklist/lnpckkmjilppmjkdjocffmmlhhepkocg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+---
 
 ## Features
 
-- **Tab Listing** — Displays all open tabs in the current window with favicons and titles.
-- **Flexible Selection** — Select individual tabs or use "Select All" to pick them all at once. Selected tabs are visually highlighted.
-- **Multiple Copy Formats** — Choose how the copied data is formatted:
-  - **Text** — `Title` + `URL` (default)
-  - **Markdown** — `[Title](URL)`
-  - **HTML** — `<a href="URL">Title</a>`
-- **Clipboard Copy** — One-click copy with visual "Copied!" feedback.
+- 📋 **List all open tabs** — Displays every tab in the current window with its favicon and title.
+- ✅ **Smart default selection** — The current (active) tab is automatically pre-selected when the popup opens.
+- ☑️ **Flexible selection** — Toggle individual tabs or use "Select All" to pick them all at once.
+- 📝 **Multiple copy formats** — Choose how copied data is formatted:
+  | Format | Output |
+  |--------|--------|
+  | **Text** | `Title` + newline + `URL` |
+  | **Markdown** | `[Title](URL)` |
+  | **HTML** | `<a href="URL">Title</a>` |
+- 📋 **One-click copy** — Copies selected tabs to the clipboard with a "Copied!" confirmation.
+
+---
 
 ## Installation
+
+### From the Chrome Web Store
+
+Install directly from the [Chrome Web Store](https://chromewebstore.google.com/detail/tablinklist/lnpckkmjilppmjkdjocffmmlhhepkocg) — no build step required.
 
 ### From Source (Developer Mode)
 
@@ -31,9 +45,19 @@ A Chrome extension that lists all open tabs in the current window, lets you sele
    ```
 4. Load into Chrome:
    - Navigate to `chrome://extensions`
-   - Enable **Developer mode**
-   - Click **Load unpacked**
-   - Select the `dist` folder
+   - Enable **Developer mode** (top-right toggle)
+   - Click **Load unpacked** and select the `dist/` folder
+
+---
+
+## Usage
+
+1. Open the popup by clicking the **TabLinkList** icon in the Chrome toolbar.
+2. The current tab is pre-selected. Check or uncheck tabs as needed.
+3. Pick a copy format (**Text**, **Markdown**, or **HTML**).
+4. Click **Copy** — the selected tabs' titles and URLs are copied to your clipboard.
+
+---
 
 ## Development
 
@@ -48,36 +72,48 @@ npm run build
 npm run lint
 ```
 
+---
+
 ## Tech Stack
 
-- [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- [Vite](https://vite.dev/) with [@crxjs/vite-plugin](https://crxjs.dev/vite-plugin/)
-- CSS Modules
-- Chrome Extension Manifest V3
+| Layer | Technology |
+|-------|-----------|
+| UI | [React 18](https://react.dev/) |
+| Language | [TypeScript](https://www.typescriptlang.org/) |
+| Build | [Vite](https://vite.dev/) + [@crxjs/vite-plugin](https://crxjs.dev/vite-plugin/) |
+| Styling | Vanilla CSS Modules |
+| Platform | Chrome Extension Manifest V3 |
+
+---
 
 ## Project Structure
 
 ```
 src/
-├── components/         # React components
-│   ├── Header.tsx          # Title bar + Select All
-│   ├── TabList.tsx          # Scrollable tab list
-│   ├── TabItem.tsx          # Individual tab row
-│   ├── FormatSelector.tsx   # Text / Markdown / HTML picker
-│   └── ActionButton.tsx     # Copy button
-├── hooks/              # Custom React hooks
-│   ├── useTabs.ts           # Fetches tabs from Chrome API
-│   └── useSelection.ts     # Manages selected tab state
-├── utils/              # Helper functions
-│   ├── format.ts            # Tab formatting logic
-│   └── clipboard.ts        # Clipboard API wrapper
-└── popup/              # Extension popup entry point
+├── components/       # React UI components
+│   ├── Header.tsx        # Title bar + Select All checkbox
+│   ├── TabList.tsx        # Scrollable list of tabs
+│   ├── TabItem.tsx        # Individual tab row
+│   ├── FormatSelector.tsx # Text / Markdown / HTML picker
+│   └── ActionButton.tsx   # Copy button with feedback
+├── hooks/            # Custom React hooks
+│   ├── useTabs.ts         # Fetches tabs from Chrome API
+│   └── useSelection.ts    # Manages selected tab state
+├── utils/            # Pure helper functions
+│   ├── format.ts          # Tab-to-string formatting
+│   └── clipboard.ts       # Clipboard API wrapper
+└── popup/            # Extension popup entry point
     ├── index.html
     ├── main.tsx
     ├── App.tsx
-    ├── App.css
-    └── index.css
+    └── App.css
 ```
+
+---
+
+## Contributing
+
+Pull requests are welcome! Please open an issue first to discuss any significant changes.
 
 ## License
 

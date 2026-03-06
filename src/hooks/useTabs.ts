@@ -9,6 +9,7 @@ export interface Tab {
 
 export function useTabs() {
     const [tabs, setTabs] = useState<Tab[]>([]);
+    const [activeTabId, setActiveTabId] = useState<number | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -25,6 +26,8 @@ export function useTabs() {
                         favIconUrl: tab.favIconUrl,
                     })).filter((tab: Tab) => tab.id !== undefined);
                     setTabs(mappedTabs);
+                    const active = tabs.find((tab: chrome.tabs.Tab) => tab.active);
+                    if (active?.id !== undefined) setActiveTabId(active.id);
                 } else {
                     // Mock data for development
                     console.warn('Chrome API not found, using mock data');
@@ -44,5 +47,5 @@ export function useTabs() {
         fetchTabs();
     }, []);
 
-    return { tabs, loading, error };
+    return { tabs, activeTabId, loading, error };
 }

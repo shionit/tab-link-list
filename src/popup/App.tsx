@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useTabs } from '../hooks/useTabs';
 import { useSelection } from '../hooks/useSelection';
 import { Header } from '../components/Header';
@@ -11,9 +11,16 @@ import { copyToClipboard } from '../utils/clipboard';
 import './App.css';
 
 function App() {
-  const { tabs, loading, error } = useTabs();
-  const { selectedIds, toggle, selectAll, deselectAll } = useSelection();
+  const { tabs, activeTabId, loading, error } = useTabs();
+  const { selectedIds, toggle, selectAll, deselectAll, setSelection } = useSelection();
   const [format, setFormat] = useState<CopyFormat>('text');
+
+  // Pre-select the current (active) tab once tabs have loaded
+  useEffect(() => {
+    if (activeTabId !== null) {
+      setSelection([activeTabId]);
+    }
+  }, [activeTabId]);
   const [copyStatus, setCopyStatus] = useState(false);
 
   const isAllSelected = useMemo(() => {

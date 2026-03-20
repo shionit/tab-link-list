@@ -3,10 +3,10 @@ import { useTabs } from '../hooks/useTabs';
 import { useSelection } from '../hooks/useSelection';
 import { Header } from '../components/Header';
 import { TabList } from '../components/TabList';
-import { FormatSelector } from '../components/FormatSelector';
-import { ActionButton } from '../components/ActionButton';
+import { BottomBar } from '../components/BottomBar';
 import type { CopyFormat } from '../utils/format';
 import { formatTabs } from '../utils/format';
+import { filterTabs } from '../utils/filter';
 import { copyToClipboard } from '../utils/clipboard';
 import './App.css';
 
@@ -14,25 +14,38 @@ function App() {
   const { tabs, activeTabId, loading, error } = useTabs();
   const { selectedIds, toggle, selectAll, deselectAll, setSelection } = useSelection();
   const [format, setFormat] = useState<CopyFormat>('text');
+  const [filterText, setFilterText] = useState('');
 
   // Pre-select the current (active) tab once tabs have loaded
   useEffect(() => {
     if (activeTabId !== null) {
       setSelection([activeTabId]);
     }
-  }, [activeTabId]);
+  }, [activeTabId, setSelection]);
   const [copyStatus, setCopyStatus] = useState(false);
 
+  const filteredTabs = useMemo(
+    () => filterTabs(tabs, filterText),
+    [tabs, filterText]
+  );
+
+  // Deselect tabs hidden by filter
+  useEffect(() => {
+    const visibleIds = new Set(filteredTabs.map((t) => t.id));
+    const hiddenIds = tabs.filter((t) => !visibleIds.has(t.id)).map((t) => t.id);
+    deselectAll(hiddenIds);
+  }, [filteredTabs, tabs, deselectAll]);
+
   const isAllSelected = useMemo(() => {
-    return tabs.length > 0 && selectedIds.size === tabs.length;
-  }, [tabs.length, selectedIds.size]);
+    return filteredTabs.length > 0 && filteredTabs.every((t) => selectedIds.has(t.id));
+  }, [filteredTabs, selectedIds]);
 
   const handleSelectAll = () => {
-    const allIds = tabs.map((t) => t.id);
+    const ids = filteredTabs.map((t) => t.id);
     if (isAllSelected) {
-      deselectAll(allIds);
+      deselectAll(ids);
     } else {
-      selectAll(allIds);
+      selectAll(ids);
     }
   };
 
@@ -40,7 +53,7 @@ function App() {
     if (selectedIds.size === 0) return;
 
     // Preserve order from tabs list
-    const selectedTabs = tabs.filter((t) => selectedIds.has(t.id));
+    const selectedTabs = filteredTabs.filter((t) => selectedIds.has(t.id));
     const text = formatTabs(selectedTabs, format);
     await copyToClipboard(text);
 
@@ -59,20 +72,22 @@ function App() {
   return (
     <div className="app">
       <Header
-        totalTabs={tabs.length}
+        totalTabs={filteredTabs.length}
         isChecked={isAllSelected}
         onSelectAll={handleSelectAll}
+        filterText={filterText}
+        onFilterChange={setFilterText}
       />
       <TabList
-        tabs={tabs}
+        tabs={filteredTabs}
         selectedIds={selectedIds}
         onToggle={toggle}
       />
-      <FormatSelector format={format} onChange={setFormat} />
-      <ActionButton
-        label="Copy"
+      <BottomBar
+        format={format}
+        onFormatChange={setFormat}
         count={selectedIds.size}
-        onClick={handleCopy}
+        onCopy={handleCopy}
         disabled={selectedIds.size === 0}
         success={copyStatus}
       />

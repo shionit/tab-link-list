@@ -13,7 +13,7 @@ Run this workflow whenever a feature is added, removed, or changed.
    - Read `src/components/` for UI-level features
    - Read `src/utils/format.ts` for supported copy formats
 
-2. **Update `.agent/rules/requirements.md`** to reflect the current feature set:
+2. **Update `docs/requirements.md`** to reflect the current feature set:
    - Keep every functional requirement accurate and up to date
    - Add new requirements under the appropriate section
    - Remove or modify any requirements that no longer apply

@@ -28,3 +28,4 @@ tab-link-list-v*.zip
 
 # Others
 .env
+settings.local.json

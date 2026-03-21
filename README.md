@@ -12,6 +12,7 @@
 - 📋 **List all open tabs** — Displays every tab in the current window with its favicon and title.
 - ✅ **Smart default selection** — The current (active) tab is automatically pre-selected when the popup opens.
 - ☑️ **Flexible selection** — Toggle individual tabs or use "Select All" to pick them all at once.
+- 🔍 **Filter tabs** — Type in the filter box to narrow the list by title or URL. Hidden tabs are automatically deselected.
 - 📝 **Multiple copy formats** — Choose how copied data is formatted:
   | Format | Output |
   |--------|--------|
@@ -54,8 +55,9 @@ Install directly from the [Chrome Web Store](https://chromewebstore.google.com/d
 
 1. Open the popup by clicking the **TabLinkList** icon in the Chrome toolbar.
 2. The current tab is pre-selected. Check or uncheck tabs as needed.
-3. Pick a copy format (**Text**, **Markdown**, or **HTML**).
-4. Click **Copy** — the selected tabs' titles and URLs are copied to your clipboard.
+3. Optionally type in the **filter box** to narrow the list by title or URL.
+4. Pick a copy format (**Text**, **Markdown**, or **HTML**) in the bottom bar.
+5. Click **Copy** — the selected tabs' titles and URLs are copied to your clipboard.
 
 ---
 
@@ -91,16 +93,16 @@ npm run lint
 ```
 src/
 ├── components/       # React UI components
-│   ├── Header.tsx        # Title bar + Select All checkbox
+│   ├── Header.tsx        # Title bar + Select All checkbox + filter input
 │   ├── TabList.tsx        # Scrollable list of tabs
 │   ├── TabItem.tsx        # Individual tab row
-│   ├── FormatSelector.tsx # Text / Markdown / HTML picker
-│   └── ActionButton.tsx   # Copy button with feedback
+│   └── BottomBar.tsx      # Format selector + Copy button (unified bar)
 ├── hooks/            # Custom React hooks
 │   ├── useTabs.ts         # Fetches tabs from Chrome API
 │   └── useSelection.ts    # Manages selected tab state
 ├── utils/            # Pure helper functions
 │   ├── format.ts          # Tab-to-string formatting
+│   ├── filter.ts          # Tab filtering by title / URL
 │   └── clipboard.ts       # Clipboard API wrapper
 └── popup/            # Extension popup entry point
     ├── index.html

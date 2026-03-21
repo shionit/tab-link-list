@@ -21,18 +21,21 @@ TabLinkList is a Chrome extension that lists all open tabs in the current window
     - When the popup opens, the **current (active) tab is pre-selected** automatically.
     - All other tabs start unselected.
 
+- **Filter**:
+    - A text input in the header allows filtering tabs by partial match on title or URL (case-insensitive).
+    - Only matching tabs are shown in the list.
+    - Tabs hidden by the filter are automatically deselected.
+
 - **Selection Controls**:
-    - "Select All" checkbox in the header to toggle all tab selections at once.
+    - "Select All" checkbox in the header toggles selection for all currently visible (filtered) tabs.
     - Individual checkboxes for per-tab selection.
 
-- **Format Selection**:
-    - Users can choose the copy format before copying.
+- **Format Selection & Copy** (unified bottom bar):
+    - Users can choose the copy format and copy in a single bottom bar.
     - **Supported Formats**:
         - **Text**: `Title\nURL` (Default)
         - **Markdown**: `[Title](URL)`
         - **HTML**: `<a href="URL">Title</a>`
-
-- **Actions**:
     - "Copy" button displays the number of selected tabs (e.g., "Copy (3)").
     - Copies selected tabs to the clipboard in the chosen format.
     - Visual feedback on success (button changes to "Copied!").

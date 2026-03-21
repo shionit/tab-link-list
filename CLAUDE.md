@@ -30,14 +30,17 @@ This is a Chrome Extension Manifest V3 popup built with React 19 + TypeScript + 
 **Data flow:**
 1. `useTabs` hook queries `chrome.tabs` API for all tabs in the current window; falls back to mock data when Chrome API is absent (dev server)
 2. `useSelection` hook manages a `Set<number>` of selected tab IDs
-3. `App.tsx` orchestrates state: auto-selects the active tab on load, computes "all selected" state, formats and copies on demand
-4. `formatTabs` in `src/utils/format.ts` handles the three output formats: `text`, `markdown`, `html`
+3. `App.tsx` orchestrates state: auto-selects the active tab on load, filters tabs by `filterText`, deselects hidden tabs, computes "all selected" state against filtered tabs, formats and copies on demand
+4. `filterTabs` in `src/utils/filter.ts` filters tabs by partial title/URL match (case-insensitive)
+5. `formatTabs` in `src/utils/format.ts` handles the three output formats: `text`, `markdown`, `html`
 
 **Key files:**
 - `manifest.json` — extension manifest (permissions: `tabs` only)
 - `src/popup/App.tsx` — root component, wires all hooks and components
 - `src/hooks/useTabs.ts` — Chrome API integration + mock fallback; defines the `Tab` type used throughout
-- `src/utils/format.ts` — pure formatting logic; only file with tests
+- `src/utils/filter.ts` — pure filter logic; tested in `filter.test.ts`
+- `src/utils/format.ts` — pure formatting logic; tested in `format.test.ts`
+- `src/components/BottomBar.tsx` — merged format selector + copy button in one row
 
 **Styling:** CSS Modules (`.module.css`) per component; global styles in `src/popup/App.css` and `src/popup/index.css`.
 

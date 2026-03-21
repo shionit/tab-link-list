@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "TabLinkList",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "List open tabs, select them, and copy titles and URLs.",
     "permissions": [
         "tabs"

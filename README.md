@@ -80,7 +80,7 @@ npm run lint
 
 | Layer | Technology |
 |-------|-----------|
-| UI | [React 18](https://react.dev/) |
+| UI | [React 19](https://react.dev/) |
 | Language | [TypeScript](https://www.typescriptlang.org/) |
 | Build | [Vite](https://vite.dev/) + [@crxjs/vite-plugin](https://crxjs.dev/vite-plugin/) |
 | Styling | Vanilla CSS Modules |

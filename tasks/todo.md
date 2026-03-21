@@ -1,8 +1,6 @@
-# Todo: Publish extension v1.0.1
+# Todo: Update Extension Screenshots
 
-- [x] Update version numbers in `package.json` and `manifest.json`
-- [x] Build the production bundle
-- [x] Package the `dist/` folder into a ZIP file
-- [x] Upload to the Chrome Web Store (Manual)
-- [x] Commit and tag the release
-- [x] Capture lessons learned (v1.0.1)
+- [x] Generate promotional screenshot with given prompt
+- [x] Copy generated image to `public/screenshot.png`
+- [x] Scale to 400px height and pad to 640x400 with white background (`public/screenshot_640x400.jpg`)
+- [x] Verify image dimensions

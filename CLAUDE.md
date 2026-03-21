@@ -45,3 +45,11 @@ This is a Chrome Extension Manifest V3 popup built with React 19 + TypeScript + 
 **Styling:** CSS Modules (`.module.css`) per component; global styles in `src/popup/App.css` and `src/popup/index.css`.
 
 Tests are in `src/**/*.test.ts` and run in a Node environment (no DOM).
+
+## Common Gotchas
+
+- **Chrome API unavailable in dev:** `chrome.tabs` doesn't exist in the browser dev server — `useTabs` automatically falls back to mock data. Test real tab behavior by building and loading the extension.
+- **Must reload extension after build:** After `npm run build`, go to `chrome://extensions` and click the reload icon for TabLinkList — Chrome does not hot-reload unpacked extensions.
+- **`main` branch is push-protected:** Never push directly to `main`. Always use a feature or release branch and open a PR.
+- **Version must be bumped in two places:** `package.json` and `manifest.json` must be updated together on release — they are not linked automatically.
+- **Releasing to Chrome Web Store:** Manual upload via the dashboard is preferred; automated credentials (`CHROME_CLIENT_ID` etc.) are not configured. See `.claude/skills/publish-extension.md` for the full release flow.

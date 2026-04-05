@@ -27,6 +27,7 @@ export function TabItem({ tab, selected, onToggle }: TabItemProps) {
                 onChange={() => onToggle(tab.id)}
                 onClick={(e) => e.stopPropagation()}
                 className={styles.checkbox}
+                tabIndex={-1}
             />
             {tab.favIconUrl && (
                 <img src={tab.favIconUrl} alt="" className={styles.favicon} />

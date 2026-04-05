@@ -21,13 +21,14 @@ export function BottomBar({ format, onFormatChange, count, onCopy, disabled, suc
     <div className={styles.container}>
       <div className={styles.options}>
         {FORMAT_OPTIONS.map((option) => (
-          <div
+          <button
             key={option.value}
+            type="button"
             className={`${styles.option} ${format === option.value ? styles.active : ''}`}
             onClick={() => onFormatChange(option.value)}
           >
             {option.label}
-          </div>
+          </button>
         ))}
       </div>
       <button

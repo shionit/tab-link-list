@@ -15,6 +15,12 @@ function App() {
   const { selectedIds, toggle, selectAll, deselectAll, setSelection } = useSelection();
   const [format, setFormat] = useState<CopyFormat>('text');
   const [filterText, setFilterText] = useState('');
+  const [copyStatus, setCopyStatus] = useState(false);
+
+  const filteredTabs = useMemo(
+    () => filterTabs(tabs, filterText),
+    [tabs, filterText]
+  );
 
   // Pre-select the current (active) tab once tabs have loaded
   useEffect(() => {
@@ -22,12 +28,6 @@ function App() {
       setSelection([activeTabId]);
     }
   }, [activeTabId, setSelection]);
-  const [copyStatus, setCopyStatus] = useState(false);
-
-  const filteredTabs = useMemo(
-    () => filterTabs(tabs, filterText),
-    [tabs, filterText]
-  );
 
   // Deselect tabs hidden by filter
   useEffect(() => {
@@ -60,6 +60,19 @@ function App() {
     setCopyStatus(true);
     setTimeout(() => setCopyStatus(false), 2000);
   };
+
+  // Ctrl+Enter from anywhere triggers copy
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.key === 'Enter') {
+        e.preventDefault();
+        handleCopy();
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedIds, filteredTabs, format]);
 
   if (loading) {
     return <div className="loading">Loading tabs...</div>;

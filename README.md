@@ -20,6 +20,7 @@
   | **Markdown** | `[Title](URL)` |
   | **HTML** | `<a href="URL">Title</a>` |
 - 📋 **One-click copy** — Copies selected tabs to the clipboard with a "Copied!" confirmation.
+- ⌨️ **Full keyboard support** — All operations are completable without a mouse.
 
 ---
 
@@ -59,6 +60,20 @@ Install directly from the [Chrome Web Store](https://chromewebstore.google.com/d
 4. Pick a copy format (**Text**, **Markdown**, or **HTML**) in the bottom bar.
 5. Click **Copy** — the selected tabs' titles and URLs are copied to your clipboard.
 
+### Keyboard Operation
+
+The popup can be operated entirely with the keyboard:
+
+| Action | Key |
+|--------|-----|
+| Open popup | Chrome keyboard shortcut (configurable in `chrome://extensions/shortcuts`) |
+| Toggle tab selection | `Space` (when a tab item is focused) |
+| Navigate between elements | `Tab` / `Shift+Tab` |
+| Trigger copy (global) | `Ctrl+Enter` |
+| Trigger copy (via button) | Focus Copy button with `Tab`, then `Enter` |
+
+**Tab sequence:** Select All checkbox → filter input → tab items → format buttons → Copy button
+
 ---
 
 ## Development
@@ -72,6 +87,9 @@ npm run build
 
 # Lint
 npm run lint
+
+# Run tests
+npm test
 ```
 
 ---
@@ -84,6 +102,7 @@ npm run lint
 | Language | [TypeScript](https://www.typescriptlang.org/) |
 | Build | [Vite](https://vite.dev/) + [@crxjs/vite-plugin](https://crxjs.dev/vite-plugin/) |
 | Styling | Vanilla CSS Modules |
+| Testing | [Vitest](https://vitest.dev/) + [Testing Library](https://testing-library.com/) |
 | Platform | Chrome Extension Manifest V3 |
 
 ---

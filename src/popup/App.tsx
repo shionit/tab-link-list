@@ -61,7 +61,7 @@ function App() {
     setTimeout(() => setCopyStatus(false), 2000);
   };
 
-  // Ctrl+Enter (Windows/Linux) / Cmd+Enter (macOS) from anywhere triggers copy
+  // Ctrl+Enter from anywhere triggers copy
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key === 'Enter') {

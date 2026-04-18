@@ -12,10 +12,11 @@ export function TabItem({ tab, selected, onToggle }: TabItemProps) {
         <div
             className={`${styles.tabItem} ${selected ? styles.selected : ''}`}
             onClick={() => onToggle(tab.id)}
-            role="button"
+            role="checkbox"
+            aria-checked={selected}
             tabIndex={0}
             onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
+                if (e.key === ' ') {
                     e.preventDefault();
                     onToggle(tab.id);
                 }
@@ -24,10 +25,10 @@ export function TabItem({ tab, selected, onToggle }: TabItemProps) {
             <input
                 type="checkbox"
                 checked={selected}
-                onChange={() => onToggle(tab.id)}
-                onClick={(e) => e.stopPropagation()}
-                className={styles.checkbox}
+                onChange={() => {}}
                 tabIndex={-1}
+                aria-hidden="true"
+                className={styles.checkbox}
             />
             {tab.favIconUrl && (
                 <img src={tab.favIconUrl} alt="" className={styles.favicon} />

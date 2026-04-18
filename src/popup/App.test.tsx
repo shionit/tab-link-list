@@ -53,7 +53,7 @@ describe('App keyboard accessibility', () => {
     render(<App />);
 
     // Deselect the active tab row
-    fireEvent.click(screen.getByRole('button', { name: /google/i }));
+    fireEvent.click(screen.getByRole('checkbox', { name: /google/i }));
 
     fireEvent.keyDown(document, { key: 'Enter', ctrlKey: true });
 

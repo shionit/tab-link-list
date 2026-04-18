@@ -25,6 +25,7 @@ TabLinkList is a Chrome extension that lists all open tabs in the current window
     - A text input in the header allows filtering tabs by partial match on title or URL (case-insensitive).
     - Only matching tabs are shown in the list.
     - Tabs hidden by the filter are automatically deselected.
+    - The filter input is auto-focused when the popup opens.
 
 - **Selection Controls**:
     - "Select All" checkbox in the header toggles selection for all currently visible (filtered) tabs.
@@ -40,13 +41,29 @@ TabLinkList is a Chrome extension that lists all open tabs in the current window
     - Copies selected tabs to the clipboard in the chosen format.
     - Visual feedback on success (button changes to "Copied!").
 
+### 2. Keyboard Operation
+
+- All operations can be completed using only the keyboard after opening the popup.
+- **Focus management**: Filter input receives focus automatically when the popup opens.
+- **Tab sequence**: Select All checkbox → filter input → tab items → format buttons → Copy button
+- **Key bindings**:
+
+    | Action | Key |
+    |--------|-----|
+    | Toggle tab selection | `Space` (when tab item is focused) |
+    | Navigate between elements | `Tab` / `Shift+Tab` |
+    | Toggle Select All | `Tab` to focus, then `Space` |
+    | Trigger copy (global) | `Ctrl+Enter` |
+    | Trigger copy (via button) | `Tab` to focus Copy button, then `Enter` |
+
 ## Technical Requirements
 
 ### 1. Technology Stack
-- **Framework**: React 18+
+- **Framework**: React 19+
 - **Language**: TypeScript
 - **Build Tool**: Vite (with `@crxjs/vite-plugin`)
 - **Styling**: Vanilla CSS Modules (`*.module.css`)
+- **Testing**: Vitest + Testing Library
 
 ### 2. Chrome Extension Architecture
 - **Manifest Version**: V3
@@ -63,3 +80,4 @@ TabLinkList is a Chrome extension that lists all open tabs in the current window
 - Custom scrollbar
 - Entry animations for list items
 - Clear distinction between selected and unselected states
+- `:focus-visible` outlines on all interactive elements for keyboard navigation

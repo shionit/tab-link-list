@@ -29,6 +29,7 @@ export function Header({ onSelectAll, isChecked, totalTabs, filterText, onFilter
                 placeholder="Filter by title or URL..."
                 value={filterText}
                 onChange={(e) => onFilterChange(e.target.value)}
+                autoFocus
             />
         </div>
     );

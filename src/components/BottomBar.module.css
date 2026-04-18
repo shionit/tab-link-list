@@ -23,10 +23,18 @@
   color: #555;
   transition: all 0.2s ease;
   user-select: none;
+  background: none;
+  border: none;
+  font-family: inherit;
 }
 
 .option:hover {
   color: #333;
+}
+
+.option:focus-visible {
+  outline: 2px solid #0066cc;
+  outline-offset: 1px;
 }
 
 .active {

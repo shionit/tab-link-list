@@ -39,6 +39,16 @@ describe('App keyboard accessibility', () => {
     expect(mockCopy).toHaveBeenCalled();
   });
 
+  it('Cmd+Enter (macOS) triggers copy when a tab is selected', async () => {
+    render(<App />);
+
+    await act(async () => {
+      fireEvent.keyDown(document, { key: 'Enter', metaKey: true });
+    });
+
+    expect(mockCopy).toHaveBeenCalled();
+  });
+
   it('Ctrl+Enter does not copy when no tabs are selected', () => {
     render(<App />);
 

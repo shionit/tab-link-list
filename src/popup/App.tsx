@@ -64,7 +64,7 @@ function App() {
   // Ctrl+Enter (Windows/Linux) / Cmd+Enter (macOS) from anywhere triggers copy
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      if (e.ctrlKey && e.key === 'Enter') {
         e.preventDefault();
         handleCopy();
       }

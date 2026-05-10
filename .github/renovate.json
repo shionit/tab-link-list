@@ -1,0 +1,55 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    // Automatically pin GitHub Actions to commit SHAs and keep them updated.
+    "helpers:pinGitHubActionDigests"
+  ],
+  // Post a Dependency Dashboard issue so updates are visible without PR spam.
+  "dependencyDashboard": true,
+  // Batch updates on Saturdays before 6 AM to keep the week's PRs predictable.
+  "schedule": ["before 9am on saturday"],
+  // Cap concurrent open Renovate PRs to avoid flooding the queue.
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "packageRules": [
+    // Auto-merge non-major devDependency updates — low blast radius for a
+    // private extension repo with no published API surface.
+    {
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
+    },
+    // Group ESLint-family packages into one PR to reduce noise.
+    {
+      "groupName": "eslint packages",
+      "matchPackageNames": ["eslint", "typescript-eslint"],
+      "matchPackagePatterns": ["^eslint-plugin-", "^@eslint/"]
+    },
+    // Group all @testing-library/* together — they tend to release in sync.
+    {
+      "groupName": "testing-library packages",
+      "matchPackagePatterns": ["^@testing-library/"]
+    },
+    // Group Vite + its plugins together — they share the Rollup peer dependency.
+    {
+      "groupName": "vite packages",
+      "matchPackageNames": ["vite"],
+      "matchPackagePatterns": ["^@vitejs/", "^@crxjs/"]
+    },
+    // Group TypeScript + all @types/* together.
+    {
+      "groupName": "TypeScript type packages",
+      "matchPackageNames": ["typescript"],
+      "matchPackagePatterns": ["^@types/"]
+    },
+    // Major runtime dependency bumps (react, react-dom) require manual review.
+    {
+      "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    }
+  ]
+}

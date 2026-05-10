@@ -8,6 +8,7 @@ on:
     branches:
       - main
 
+# Minimal permissions: read-only by default; no write access needed for CI.
 permissions:
   contents: read
 
@@ -17,11 +18,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Restrict outbound network to only the hosts this job legitimately needs.
+      # Use egress-policy: audit during initial rollout to observe without blocking.
+      - name: Harden runner
+        uses: step-security/harden-runner@a5ad31d6a139d249332a2605b85202e8c0b78450 # v2.19.1
+        with:
+          egress-policy: audit
+
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22
           cache: 'npm'

@@ -7,7 +7,7 @@
   ],
   // Post a Dependency Dashboard issue so updates are visible without PR spam.
   "dependencyDashboard": true,
-  // Batch updates on Saturdays before 6 AM to keep the week's PRs predictable.
+  // Batch updates on Saturdays before 9 AM to keep the week's PRs predictable.
   "schedule": ["before 9am on saturday"],
   // Cap concurrent open Renovate PRs to avoid flooding the queue.
   "prConcurrentLimit": 5,

@@ -1,6 +1,7 @@
 ---
 name: release
 description: Full release flow for TabLinkList. Runs in strict order: docs update → version bump PR → wait for merge → ZIP + tag. Use when the user asks to release, cut a release, or ship a new version.
+disable-model-invocation: true
 ---
 
 # Release Flow

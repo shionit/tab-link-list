@@ -12,6 +12,15 @@
   // Cap concurrent open Renovate PRs to avoid flooding the queue.
   "prConcurrentLimit": 5,
   "prHourlyLimit": 2,
+  // Wait 3 days after any release before proposing it, to give the ecosystem
+  // time to catch compromised/malicious publishes (supply chain attacks).
+  "minimumReleaseAge": "3 days",
+  // Security fixes bypass minimumReleaseAge by default; apply the same 3-day
+  // wait to them too. Other vulnerabilityAlerts defaults (immediate PR,
+  // ignore schedule) are kept because this object is merged.
+  "vulnerabilityAlerts": {
+    "minimumReleaseAge": "3 days"
+  },
   "packageRules": [
     // Auto-merge non-major devDependency updates — low blast radius for a
     // private extension repo with no published API surface.
